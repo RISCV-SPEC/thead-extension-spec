@@ -1,0 +1,45 @@
+[#xxtvcoder-insns-vabsmax-vv,reftext=Vector absolute maximum (vector-vector)]
+==== xt.vabsmax.vv
+
+Synopsis::
+Vector absolute maximum.
+
+Mnemonic::
+xt.vabsmax.vv _vd_, _vs2_, _vs1_, _vm_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x7 },
+    { bits:  5, name: 'vs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: 'vm' },
+    { bits:  6, name: '0x1a' },
+]}
+....
+
+Description::
+Take the absolute values of both inputs, then select the larger one.
+
+Operation::
+[source,sail]
+--
+vd[i] = maxu(abs(vs2[i]), abs(vs1[i]))
+--
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVcoder (<<#xxtvcoder>>)
+|===

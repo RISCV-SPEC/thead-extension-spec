@@ -45,6 +45,8 @@ The collection consists of the following ISA extensions:
 * `XTheadInt` provides acceleration interruption instructions.
 * `XTheadVdot` provides instructions for vector dot.
 * `XTheadVector` provides XuanTie vector instructions.
+* `XXTVcoder` provides vector coder turbo instructions.
+* `XXTVarith` provides vector arithmetic turbo instructions.
 
 === Dependencies to standard extensions
 

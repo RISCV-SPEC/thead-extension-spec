@@ -1,0 +1,48 @@
+[#xxtvcoder-insns-vwabau-vx,reftext=Vector widening unsigned absolute difference and accumulate (vector-scalar)]
+==== xt.vwabau.vx
+
+Synopsis::
+Vector absolute value of the difference obtained by zero-extended unsigned numbers and accumulate.
+
+Mnemonic::
+xt.vwabau.vx _vd_, _vs2_, _rs1_, _vm_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x7 },
+    { bits:  5, name: 'rs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: 'vm' },
+    { bits:  6, name: '0x3f' },
+]}
+....
+
+Description::
+After the unsigned expansion of corresponding element of the source vector and the source scalar, the corresponding elements are subtracted and then the absolute value is computed, and accumulated to the destination registers.
+
+Reserved Encodings::
+SEW is any value other than 8, 16, 32.
+
+Operation::
+[source,sail]
+--
+vd[i] += abs(unsigned(vs2[i]) - unsigned(rs1))
+--
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVcoder (<<#xxtvcoder>>)
+|===

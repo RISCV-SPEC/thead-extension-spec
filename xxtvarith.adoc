@@ -1,0 +1,35 @@
+[#xxtvarith]
+== Vector Arithmetic Turbo instructions (XXTVarith)
+
+[NOTE,caption=Frozen]
+The `XXTVarith` extension is `stable`.
+
+The `XXTVarith` ISA extension provides vector arithmetic turbo instructions including vector interleave, Galois-field multiply-xor, and fast CRC folding operations.
+
+This extension depends on the availability of the `V` (vector) ISA extension.
+
+Extension version: 1.0.
+
+The table below gives an overview of the instructions:
+
+[cols="^3,^3,12,18",stripes=even,options="header"]
+|===
+| RV32 | RV64 | Mnemonic              | Instruction
+| Y    | Y    | xt.vile.vv     _vd_, _vs2_, _vs1_ | <<#xxtvarith-insns-vile-vv>>
+| Y    | Y    | xt.vilo.vv     _vd_, _vs2_, _vs1_ | <<#xxtvarith-insns-vilo-vv>>
+| Y    | Y    | xt.vgmulxor.vv _vd_, _vs2_, _vs1_ | <<#xxtvarith-insns-vgmulxor-vv>>
+| Y    | Y    | xt.vcrcfoldr.vv _vd_, _vs2_, _vs1_ | <<#xxtvarith-insns-vcrcfoldr-vv>>
+| Y    | Y    | xt.vcrcfoldn.vv _vd_, _vs2_, _vs1_ | <<#xxtvarith-insns-vcrcfoldn-vv>>
+|===
+
+[#xxtvarith-insns,reftext="Instructions"]
+=== Instructions
+include::xxtvarith/vile_vv.adoc[]
+<<<
+include::xxtvarith/vilo_vv.adoc[]
+<<<
+include::xxtvarith/vgmulxor_vv.adoc[]
+<<<
+include::xxtvarith/vcrcfoldr_vv.adoc[]
+<<<
+include::xxtvarith/vcrcfoldn_vv.adoc[]
