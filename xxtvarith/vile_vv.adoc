@@ -1,0 +1,58 @@
+[#xxtvarith-insns-vile-vv,reftext=Vector interleave even (vector-vector)]
+==== xt.vile.vv
+
+Synopsis::
+Vector interleave even.
+
+Mnemonic::
+xt.vile.vv _vd_, _vs2_, _vs1_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x6 },
+    { bits:  5, name: 'vs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: '1' },
+    { bits:  6, name: '0x36' },
+]}
+....
+
+Description::
+Interleave the even-numbered elements of two vectors for storage to form a new vector data.
+The even numbered elements of vs1 and vs2 are extracted
+and the even numbered elements of vs2 are stored in the even numbered positions of vd and the even numbered elements of vs1 are stored in the odd numbered positions of vd.
+
+Below is an example schematic diagram of an instruction with lmul=1 and four elements:
+
+[cols="5*",options="header"]
+|===
+|      | [3]    | [2]    | [1]    | [0]
+| src  | vs1[3] | vs1[2] | vs1[1] | vs1[0]
+| src  | vs2[3] | vs2[2] | vs2[1] | vs2[0]
+| dst  | vs1[2] | vs2[2] | vs1[0] | vs2[0]
+|===
+
+Operation::
+[source,sail]
+--
+vd[2*i]   = vs2[2*i]
+vd[2*i+1] = vs1[2*i]
+--
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVarith (<<#xxtvarith>>)
+|===

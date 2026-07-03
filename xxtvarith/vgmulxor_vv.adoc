@@ -1,0 +1,81 @@
+[#xxtvarith-insns-vgmulxor-vv,reftext=Vector GHASH Galois-Field multiply and xor (vector-vector)]
+==== xt.vgmulxor.vv
+
+Synopsis::
+Vector Multiply over GHASH Galois-Field and xor.
+
+Mnemonic::
+xt.vgmulxor.vv _vd_, _vs2_, _vs1_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x6 },
+    { bits:  5, name: 'vs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: '1' },
+    { bits:  6, name: '0x1e' },
+]}
+....
+
+Description::
+A GHASH~H~ multiply and xor is performed.
+This instruction treats all of the inputs and outputs as 8-bit polynomials and performs operations over GF[2].
+It produces the product over GF(2^8^) of the two 8-bit inputs.
+The multiplication over GF(2^8) is a carryless multiply of two 8-bit polynomials modulo GHASH's
+irreducible polynomial (x^8^ + x^4^ + x^3^ + x^2^ + 1).
+The result of gmul is xored with vd.
+
+This instruction must always be implemented such that its execution latency does not depend on the data being operated upon.
+
+Reserved Encodings::
+SEW is any value other than 8.
+
+Operation::
+[source,sail]
+----
+function clause execute (VGMULXOR(vs2, vs1, vd)) = {
+  if(LMUL*VLEN < EGW)  then {
+    handle_illegal();  // illegal instruction exception
+    RETIRE_FAIL
+  } else {
+  eg_len = (vl/EGS)
+  eg_start = (vstart/EGS)
+
+  foreach (i from eg_start to eg_len-1) {
+    let Y = get_velem(vs1,EGW=8,i);  // Multiplier
+    let H = get_velem(vs2,EGW=8,i); // Multiplicand
+    let result = get_velem(vd,EGW=8,i);
+    let Z : bits(8) = 0;
+    for (int bit = 0; bit < 8; bit++) {
+      if bit_to_bool(Y[bit])
+        Z ^= H
+      bool reduce = (H >> 7) & 1;
+      H = H << 1; // left shift H by 1
+      if (reduce)
+        H ^= 0x1d; // Reduce using x^7 + x^2 + x^1 + 1 polynomial
+    }
+    result ^= Z;
+    set_velem(vd, EGW=8, i, result);
+  }
+  RETIRE_SUCCESS
+ }
+}
+----
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVarith (<<#xxtvarith>>)
+|===

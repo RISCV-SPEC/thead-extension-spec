@@ -1,0 +1,48 @@
+[#xxtvcoder-insns-vwabd-vx,reftext=Vector widening signed absolute difference (vector-scalar)]
+==== xt.vwabd.vx
+
+Synopsis::
+Vector absolute value of the difference obtained by sign-extended signed numbers.
+
+Mnemonic::
+xt.vwabd.vx _vd_, _vs2_, _rs1_, _vm_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x7 },
+    { bits:  5, name: 'rs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: 'vm' },
+    { bits:  6, name: '0x39' },
+]}
+....
+
+Description::
+After the signed expansion of each element of the source vector and the source scalar, the corresponding elements are subtracted and then returned to the destination register as absolute values.
+
+Reserved Encodings::
+SEW is any value other than 8, 16, 32.
+
+Operation::
+[source,sail]
+--
+vd[i] = abs(signed(vs2[i]) - signed(rs1))
+--
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVcoder (<<#xxtvcoder>>)
+|===

@@ -48,6 +48,8 @@ include::xtheadmac.adoc[]
 include::xtheadfmv.adoc[]
 include::xtheadint.adoc[]
 include::xtheadvdot.adoc[]
+include::xxtvcoder.adoc[]
+include::xxtvarith.adoc[]
 include::xtheadvector.adoc[]
 
 include::xtheadmae.adoc[]

@@ -1,0 +1,45 @@
+[#xxtvcoder-insns-vabd-vv,reftext=Vector absolute value of the difference (vector-vector)]
+==== xt.vabd.vv
+
+Synopsis::
+Vector absolute value of the difference.
+
+Mnemonic::
+xt.vabd.vv _vd_, _vs2_, _vs1_, _vm_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x6 },
+    { bits:  5, name: 'vs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: 'vm' },
+    { bits:  6, name: '0x32' },
+]}
+....
+
+Description::
+Subtract each corresponding element of the two source registers and then return the absolute value to the destination registers. The operands are signed numbers.
+
+Operation::
+[source,sail]
+--
+vd[i] = abs(vs2[i] - vs1[i])
+--
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVcoder (<<#xxtvcoder>>)
+|===

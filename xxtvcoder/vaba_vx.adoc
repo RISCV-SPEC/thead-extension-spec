@@ -1,0 +1,45 @@
+[#xxtvcoder-insns-vaba-vx,reftext=Vector absolute difference and accumulate (vector-scalar)]
+==== xt.vaba.vx
+
+Synopsis::
+Vector absolute value of the difference and accumulate.
+
+Mnemonic::
+xt.vaba.vx _vd_, _vs2_, _rs1_, _vm_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x7 },
+    { bits:  5, name: 'rs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: 'vm' },
+    { bits:  6, name: '0x37' },
+]}
+....
+
+Description::
+Subtract each corresponding element of the source vector and the source scalar and then compute the absolute value, accumulating to the destination vector. The operands are signed numbers.
+
+Operation::
+[source,sail]
+--
+vd[i] += abs(vs2[i] - rs1)
+--
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVcoder (<<#xxtvcoder>>)
+|===

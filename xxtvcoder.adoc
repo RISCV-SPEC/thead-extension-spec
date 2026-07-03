@@ -1,0 +1,89 @@
+[#xxtvcoder]
+== Vector Coder Turbo instructions (XXTVcoder)
+
+[NOTE,caption=Frozen]
+The `XXTVcoder` extension is `stable`.
+
+The `XXTVcoder` ISA extension provides vector coder turbo instructions including absolute difference, widening absolute difference, absolute difference accumulate, floating-point absolute difference, and absolute max operations.
+
+This extension depends on the availability of the `V` (vector) ISA extension.
+
+Extension version: 1.0.
+
+The table below gives an overview of the instructions:
+
+[cols="^3,^3,12,18",stripes=even,options="header"]
+|===
+| RV32 | RV64 | Mnemonic              | Instruction
+| Y    | Y    | xt.vabd.vv    _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vabd-vv>>
+| Y    | Y    | xt.vabd.vx    _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vabd-vx>>
+| Y    | Y    | xt.vabd.vi    _vd_, _vs2_, _imm_, _vm_ | <<#xxtvcoder-insns-vabd-vi>>
+| Y    | Y    | xt.vabdu.vv   _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vabdu-vv>>
+| Y    | Y    | xt.vabdu.vx   _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vabdu-vx>>
+| Y    | Y    | xt.vabdu.vi   _vd_, _vs2_, _uimm_, _vm_ | <<#xxtvcoder-insns-vabdu-vi>>
+| Y    | Y    | xt.vaba.vv    _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vaba-vv>>
+| Y    | Y    | xt.vaba.vx    _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vaba-vx>>
+| Y    | Y    | xt.vaba.vi    _vd_, _vs2_, _imm_, _vm_ | <<#xxtvcoder-insns-vaba-vi>>
+| Y    | Y    | xt.vabau.vv   _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vabau-vv>>
+| Y    | Y    | xt.vabau.vx   _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vabau-vx>>
+| Y    | Y    | xt.vabau.vi   _vd_, _vs2_, _uimm_, _vm_ | <<#xxtvcoder-insns-vabau-vi>>
+| Y    | Y    | xt.vwabd.vv   _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vwabd-vv>>
+| Y    | Y    | xt.vwabd.vx   _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vwabd-vx>>
+| Y    | Y    | xt.vwabdu.vv  _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vwabdu-vv>>
+| Y    | Y    | xt.vwabdu.vx  _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vwabdu-vx>>
+| Y    | Y    | xt.vwaba.vv   _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vwaba-vv>>
+| Y    | Y    | xt.vwaba.vx   _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vwaba-vx>>
+| Y    | Y    | xt.vwabau.vv  _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vwabau-vv>>
+| Y    | Y    | xt.vwabau.vx  _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vwabau-vx>>
+| Y    | Y    | xt.vfabd.vv   _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vfabd-vv>>
+| Y    | Y    | xt.vfabd.vf   _vd_, _vs2_, _rs1_, _vm_ | <<#xxtvcoder-insns-vfabd-vf>>
+| Y    | Y    | xt.vabsmax.vv _vd_, _vs2_, _vs1_, _vm_ | <<#xxtvcoder-insns-vabsmax-vv>>
+|===
+
+[#xxtvcoder-insns,reftext="Instructions"]
+=== Instructions
+include::xxtvcoder/vabd_vv.adoc[]
+<<<
+include::xxtvcoder/vabd_vx.adoc[]
+<<<
+include::xxtvcoder/vabd_vi.adoc[]
+<<<
+include::xxtvcoder/vabdu_vv.adoc[]
+<<<
+include::xxtvcoder/vabdu_vx.adoc[]
+<<<
+include::xxtvcoder/vabdu_vi.adoc[]
+<<<
+include::xxtvcoder/vaba_vv.adoc[]
+<<<
+include::xxtvcoder/vaba_vx.adoc[]
+<<<
+include::xxtvcoder/vaba_vi.adoc[]
+<<<
+include::xxtvcoder/vabau_vv.adoc[]
+<<<
+include::xxtvcoder/vabau_vx.adoc[]
+<<<
+include::xxtvcoder/vabau_vi.adoc[]
+<<<
+include::xxtvcoder/vwabd_vv.adoc[]
+<<<
+include::xxtvcoder/vwabd_vx.adoc[]
+<<<
+include::xxtvcoder/vwabdu_vv.adoc[]
+<<<
+include::xxtvcoder/vwabdu_vx.adoc[]
+<<<
+include::xxtvcoder/vwaba_vv.adoc[]
+<<<
+include::xxtvcoder/vwaba_vx.adoc[]
+<<<
+include::xxtvcoder/vwabau_vv.adoc[]
+<<<
+include::xxtvcoder/vwabau_vx.adoc[]
+<<<
+include::xxtvcoder/vfabd_vv.adoc[]
+<<<
+include::xxtvcoder/vfabd_vf.adoc[]
+<<<
+include::xxtvcoder/vabsmax_vv.adoc[]

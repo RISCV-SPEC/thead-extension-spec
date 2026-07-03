@@ -1,0 +1,75 @@
+[#xxtvarith-insns-vcrcfoldn-vv,reftext=Vector fast fold for fast norm CRC (vector-vector)]
+==== xt.vcrcfoldn.vv
+
+Synopsis::
+Vector fast fold approach for fast norm CRC computing.
+
+Mnemonic::
+xt.vcrcfoldn.vv _vd_, _vs2_, _vs1_
+
+Encoding::
+[wavedrom, , svg]
+....
+{reg:[
+    { bits:  7, name: 0xb, attr: ['custom-0, 32 bit'] },
+    { bits:  5, name: 'vd' },
+    { bits:  3, name: 0x6 },
+    { bits:  5, name: 'vs1' },
+    { bits:  5, name: 'vs2' },
+    { bits:  1, name: '1' },
+    { bits:  6, name: '0x3f' },
+]}
+....
+
+Description::
+Realize the fast input data folding operation for fast norm CRC computing.
+
+Each SEW-bit element in vd vector register is carry-less multiplied by either each SEW-bit element in vs2 first,
+generating two intermediate results of interleaved arrangements (if elements in vd / vs2 indexed by [1, 2, 3, 4], the intermediate results shall be [1, 3] and [2, 4]).
+Inactive elements are replaced with 0.
+
+Then perform 128-bit vector bitwise xor between two intermediate results above and vector bytes reverse elements in vs1, generating result in vd.
+
+[WARNING]
+====
+It is recommended that users ensure vl/vstart is an even number,
+as scenarios with odd numbers do not conform to the original definition of the instruction.
+====
+
+Reserved Encodings::
+SEW is any value other than 64.
+
+Operation::
+[source,sail]
+----
+function clause execute (VCRCFOLDN(vs2, vs1, vd, suffix)) = {
+    foreach (i from vstart to vl-1) {
+        let op1 : bits (SEW) = get_velem(vd,i)
+        let op2 : bits (SEW) = get_velem(vs2,i);
+        let product1 : bits (SEW) = if i % 2 != 0 then cat(clmul(op1,op2,SEW), clmulh(op1,op2,SEW));
+        let product2 : bits (SEW) = if i % 2 == 0 then cat(clmul(op1,op2,SEW), clmulh(op1,op2,SEW));
+      }
+
+    foreach (i from vstart to vl-1) {
+        let op3 : bits (SEW) = get_velem(vs1,i)
+        let op3_rev : bits (2 * SEW) = rev8(op3, SEW)
+        let result : bits (SEW) = vxor(vxor(product1, product2, SEW), op3_rev, SEW);
+        set_velem(vd, i, result);
+      }
+      RETIRE_SUCCESS
+    }
+----
+
+Permission::
+This instruction can be executed in all privilege levels.
+
+Exceptions::
+This instruction does not trigger any exceptions.
+
+Included in::
+[%header]
+|===
+|Extension
+
+|XXTVarith (<<#xxtvarith>>)
+|===
