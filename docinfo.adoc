@@ -14,6 +14,7 @@ Copyright 2022 VRULL GmbH
 The list below includes all contributors to this document in alphabetical order:
 
 [%hardbreaks]
+* Bohan Lei <garthlei@linux.alibaba.com>
 * Christoph Müllner <christoph.muellner@vrull.eu>
 * Cooper Qu <cooper.qu@linux.alibaba.com>
 * Jin Ma <jinma@linux.alibaba.com>
