@@ -19,6 +19,12 @@ This document specifies the XuanTie extension collection,
 a collection of vendor extensions that are implemented
 in many XuanTie processors.
 
+Earlier versions of this specification and related software may refer to this
+extension collection as THEAD or T-HEAD. The collection is now documented under
+the XuanTie name. The `XThead*` ISA extension names and the `th.` instruction
+and CSR prefixes are retained as architectural identifiers for compatibility
+with existing software and tooling.
+
 === Overview
 
 The XuanTie extension collection follows the principles of the RISC-V ISA.
@@ -38,7 +44,7 @@ The collection consists of the following ISA extensions:
 * `XTheadFmv` provides double floating-point high-bit data transmission instructions.
 * `XTheadInt` provides acceleration interruption instructions.
 * `XTheadVdot` provides instructions for vector dot.
-* `XTheadVector` provides instructions for thead vector.
+* `XTheadVector` provides XuanTie vector instructions.
 
 === Dependencies to standard extensions
 

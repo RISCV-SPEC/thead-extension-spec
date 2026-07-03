@@ -1,12 +1,12 @@
-SPEC=xthead
-HEADER_SOURCE := $(SPEC).adoc
+PDF_BASENAME=XuanTie-ISA-extension
+HEADER_SOURCE := xuantie.adoc
 GITVER=$(shell git describe --tag --always --dirty)
 GITDATE=$(shell git show -s --format=%ci | cut -d ' ' -f 1)
 
 # e.g. "2022-07-29-d027732", or "2022-08-01-dbd4007-dirty"
-VERSION="$(GITDATE)-$(GITVER)"
+VERSION=$(GITDATE)-$(GITVER)
 
-$(SPEC)-$(VERSION).pdf: *.adoc revision.adoc-snippet
+$(PDF_BASENAME)-$(VERSION).pdf: *.adoc revision.adoc-snippet
 	@echo "Building asciidoc"
 	asciidoctor-pdf \
 		--attribute=mathematical-format=svg \
@@ -24,8 +24,8 @@ revision.adoc-snippet:
 	echo ":revnumber: ${GITVER}" >> $@-tmp
 	diff $@ $@-tmp || mv $@-tmp $@
 
-all: $(SPEC)-$(VERSION).pdf
+all: $(PDF_BASENAME)-$(VERSION).pdf
 
 clean:
-	rm -f $(SPEC)-*.pdf
+	rm -f $(PDF_BASENAME)-*.pdf
 	rm -f revision.adoc-snippet*

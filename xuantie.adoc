@@ -1,6 +1,6 @@
 [[header]]
-:description: XuanTie ISA extensions (Xthead*)
-:company: Alibaba Damo Academy(Xuantie Team)
+:description: XuanTie ISA extensions
+:company: Alibaba Damo Academy (XuanTie Team)
 include::revision.adoc-snippet[]
 :url-thead: https://www.xrvm.cn
 :doctype: book
@@ -28,7 +28,7 @@ endif::[]
 :footnote:
 :xrefstyle: short
 
-= XuanTie ISA extension specification (Xthead*)
+= XuanTie ISA Extension Specification
 
 include::docinfo.adoc[]
 
